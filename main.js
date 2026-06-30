@@ -90,9 +90,12 @@
     if (promoInput) promoInput.value = appliedPromo;
     if (promoResult) promoResult.hidden = false;
     if (promoStatus) {
-      promoStatus.textContent = `Промокод ${appliedPromo} сохранен. Его действительность и скидка проверяются на странице оплаты.`;
+      promoStatus.textContent = `Промокод ${appliedPromo} сохранен. Его действительность и индивидуальные условия проверяются на странице оплаты.`;
       promoStatus.classList.add("is-success");
     }
+    document.querySelectorAll("[data-applied-promo]").forEach((node) => {
+      node.textContent = appliedPromo;
+    });
     document.documentElement.classList.add("promo-applied");
     savePromo(appliedPromo);
 
@@ -101,15 +104,6 @@
 
   document.querySelectorAll("[data-config-price]").forEach((node) => {
     node.textContent = config.productPrice || "999 ₽";
-  });
-  document.querySelectorAll("[data-config-promo-price]").forEach((node) => {
-    node.textContent = config.promoPrice || "499,50 ₽";
-  });
-  document.querySelectorAll("[data-config-discount]").forEach((node) => {
-    node.textContent = config.promoDiscount || "50%";
-  });
-  document.querySelectorAll("[data-config-commission]").forEach((node) => {
-    node.textContent = config.partnerCommission || "20%";
   });
   document.querySelectorAll("[data-config-name]").forEach((node) => {
     node.textContent = config.productName || "AI-Лето: 7 проектов для школьника";

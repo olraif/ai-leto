@@ -235,6 +235,26 @@ button { color: inherit; }
 .tag-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .tag-list li { display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 14px; padding: 0 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 16px; background: rgba(255,255,255,.09); font-size: 13px; font-weight: 700; }
 .tag-list span { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border-radius: 50%; color: var(--ink); background: var(--lime); }
+.learning-visuals { display: grid; grid-template-columns: 1.2fr .8fr; gap: 55px; align-items: center; margin-top: 58px; }
+.learning-path { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 28px; border: 1px solid rgba(255,255,255,.2); border-radius: 22px; background: rgba(255,255,255,.09); }
+.learning-path > div { display: grid; min-width: 66px; place-items: center; text-align: center; }
+.learning-path span { display: grid; width: 54px; height: 54px; place-items: center; border-radius: 16px; background: #fff; font-size: 24px; box-shadow: 0 9px 25px rgba(31,24,85,.18); }
+.learning-path small { margin-top: 9px; color: #fff; font-size: 10px; font-weight: 700; }
+.learning-path b { color: rgba(255,255,255,.42); font-size: 17px; }
+.booklet-pair { position: relative; min-height: 330px; }
+.mini-booklet { position: absolute; top: 18px; width: 225px; height: 285px; overflow: hidden; padding: 26px; border: 1px solid rgba(23,26,43,.12); border-radius: 10px 22px 22px 10px; color: var(--ink); box-shadow: 0 22px 46px rgba(31,24,85,.22); }
+.mini-booklet::before { content: ""; position: absolute; inset: 0 auto 0 11px; width: 1px; background: rgba(23,26,43,.15); }
+.mini-booklet small { font-size: 8px; font-weight: 800; letter-spacing: .12em; }
+.mini-booklet h3 { position: relative; z-index: 2; margin: 48px 0 14px; font-size: 29px; line-height: 1.05; letter-spacing: -.055em; }
+.mini-booklet strong { color: var(--violet); }
+.mini-booklet p { font-size: 11px; font-weight: 700; }
+.mini-booklet > i { position: absolute; right: 24px; bottom: 18px; font-size: 70px; font-style: normal; }
+.child-booklet { right: 122px; z-index: 2; background: #fbf5ff; transform: rotate(-6deg); }
+.child-booklet > i { color: var(--lime); }
+.mentor-booklet { right: 5px; z-index: 1; background: var(--lime); transform: rotate(7deg); }
+.mentor-booklet h3 { margin-top: 37px; font-size: 25px; }
+.mentor-booklet ul { position: relative; z-index: 2; margin: 0; padding: 0; list-style: none; font-size: 9px; font-weight: 700; line-height: 1.8; }
+.mentor-booklet > i { color: rgba(23,26,43,.16); }
 
 .safety-section { background: #eef8f5; }
 .safety-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 110px; align-items: start; }
@@ -356,7 +376,6 @@ button { color: inherit; }
 .rights-copy > p { margin: 0; padding: 20px 0; border-bottom: 1px solid #d8d0e7; color: var(--ink-soft); }
 .rights-copy .rights-note { margin-top: 20px; padding: 20px; border: 0; border-radius: 16px; color: var(--ink); background: #fff; font-size: 13px; }
 
-.discount-line { margin: -20px 0 28px; color: var(--lime); font-size: 12px; font-weight: 700; }
 .price-card-main .button + .button { margin-top: 10px; }
 .promo-box { display: grid; grid-template-columns: .8fr 1.2fr; gap: 45px; margin-top: 20px; padding: 34px; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); }
 .promo-box-copy h3 { margin: 0 0 12px; font-size: 28px; letter-spacing: -.04em; }
@@ -367,12 +386,11 @@ button { color: inherit; }
 .promo-input-row input::placeholder { text-transform: none; }
 .promo-status { min-height: 20px; margin: 10px 4px 0; color: #a23f38; font-size: 11px; }
 .promo-status.is-success { color: #347847; }
-.promo-result { grid-column: 1 / -1; display: grid; grid-template-columns: .75fr 1fr auto; gap: 25px; align-items: center; padding: 25px; border-radius: 18px; color: #fff; background: var(--ink); }
+.promo-result { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 25px; border-radius: 18px; color: #fff; background: var(--ink); }
 .promo-result[hidden] { display: none; }
-.promo-result > div span, .promo-result > div strong { display: block; }
-.promo-result > div > span { color: #9fa5b4; font-size: 11px; }
-.promo-result > div strong { color: var(--lime); font-size: 22px; }
+.promo-result-mark { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 50%; color: var(--ink); background: var(--lime); font-size: 21px; font-weight: 800; }
 .promo-result > p { margin: 0; color: #c2c6d1; font-size: 11px; }
+.promo-result > p strong { color: var(--lime); font-size: 14px; }
 .promo-result .button { white-space: nowrap; }
 
 .final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
@@ -420,6 +438,8 @@ button { color: inherit; }
   .parent-grid, .device-grid, .organization-hero, .rights-grid { gap: 55px; }
   .organization-benefits { grid-template-columns: 1fr 1fr; }
   .promo-box { grid-template-columns: 1fr; }
+  .learning-visuals { grid-template-columns: 1fr; }
+  .booklet-pair { width: min(100%, 450px); margin-inline: auto; }
 }
 
 @media (max-width: 720px) {
@@ -469,6 +489,16 @@ button { color: inherit; }
   .parent-grid, .device-grid, .organization-hero, .rights-grid { gap: 40px; }
   .parent-benefits { grid-template-columns: 1fr; }
   .parent-benefits li { min-height: 72px; }
+  .learning-visuals { margin-top: 38px; }
+  .learning-path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 8px; padding: 22px 14px; }
+  .learning-path b { display: none; }
+  .learning-path > div { min-width: 0; }
+  .booklet-pair { min-height: 290px; }
+  .mini-booklet { width: 190px; height: 250px; padding: 22px; }
+  .mini-booklet h3 { margin-top: 38px; font-size: 25px; }
+  .mentor-booklet h3 { margin-top: 29px; font-size: 22px; }
+  .child-booklet { right: 86px; }
+  .mentor-booklet { right: 0; }
   .device-icons { justify-content: space-between; }
   .device-icons > span { width: 31%; }
   .workflow-list { grid-template-columns: 1fr; }
