@@ -52,11 +52,11 @@
   }
 
   document.querySelectorAll("[data-config-price]").forEach((node) => {
-    node.textContent = config.productPrice || "490 ₽";
+    node.textContent = config.productPrice || "990 ₽";
   });
 
   document.querySelectorAll("[data-payment]").forEach((button) => {
-    button.setAttribute("aria-label", `Купить набор за ${config.productPrice || "490 ₽"}`);
+    button.setAttribute("aria-label", `Купить набор за ${config.productPrice || "990 ₽"}`);
   });
 
   document.querySelectorAll("[data-config-name]").forEach((node) => {

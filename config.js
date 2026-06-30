@@ -1,6 +1,6 @@
 const SITE_CONFIG = {
   paymentUrl: "PASTE_PLATI_PRODUCT_URL_HERE",
-  productPrice: "490 ₽",
+  productPrice: "990 ₽",
   productName: "7 AI-проектов для школьника на лето",
   contactEmail: "PASTE_EMAIL_HERE"
 };
