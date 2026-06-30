@@ -3,8 +3,17 @@
 
   const config = window.SITE_CONFIG || {};
   const analyticsKey = "aiProjectsAnalytics";
+  const promoStorageKey = "aiSummerPromoCode";
   const toast = document.querySelector("#toast");
+  const toastTitle = document.querySelector("#toast-title");
+  const toastMessage = document.querySelector("#toast-message");
+  const promoInput = document.querySelector("#promo-code");
+  const promoForm = document.querySelector("#promo-form");
+  const promoStatus = document.querySelector("#promo-status");
+  const promoResult = document.querySelector("#promo-result");
   let toastTimer;
+  let appliedPromo = "";
+  let lastTrackedPromo = "";
 
   function track(eventName, details = {}) {
     const event = {
@@ -24,88 +33,194 @@
       console.warn("Не удалось сохранить событие в localStorage", error);
     }
 
-    console.log("[Лето с AI]", event);
+    console.log("[AI-Лето]", event);
   }
 
   function isPlaceholder(value) {
     return !value || value === "#" || /^PASTE_/i.test(value.trim());
   }
 
-  function paymentIsReady() {
-    return !isPlaceholder(config.paymentUrl);
+  function normalizePromo(value) {
+    return String(value || "").trim().toUpperCase().replace(/\s+/g, "-").slice(0, 50);
   }
 
-  function paymentUrlWithQuery() {
-    const target = new URL(config.paymentUrl, window.location.href);
+  function readStoredPromo() {
+    try {
+      return normalizePromo(localStorage.getItem(promoStorageKey));
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function savePromo(code) {
+    try {
+      localStorage.setItem(promoStorageKey, code);
+    } catch (error) {
+      console.warn("Не удалось сохранить промокод в localStorage", error);
+    }
+  }
+
+  function urlWithCurrentQuery(rawUrl, promo = "") {
+    const target = new URL(rawUrl, window.location.href);
     const sourceParams = new URLSearchParams(window.location.search);
+
     sourceParams.forEach((value, key) => {
-      if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+      if (key !== "promo" && !target.searchParams.has(key)) {
+        target.searchParams.set(key, value);
+      }
     });
+
+    if (promo) target.searchParams.set("promo", promo);
     return target.href;
   }
 
-  function showToast() {
+  function showToast(title, message) {
     if (!toast) return;
     window.clearTimeout(toastTimer);
+    if (toastTitle) toastTitle.textContent = title;
+    if (toastMessage) toastMessage.textContent = message;
     toast.classList.add("is-visible");
-    toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 6500);
+    toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 7500);
+  }
+
+  function showPromoState(code, shouldTrack = true) {
+    appliedPromo = normalizePromo(code);
+    if (!appliedPromo) return;
+
+    if (promoInput) promoInput.value = appliedPromo;
+    if (promoResult) promoResult.hidden = false;
+    if (promoStatus) {
+      promoStatus.textContent = `Промокод ${appliedPromo} сохранен. Его действительность и скидка проверяются на странице оплаты.`;
+      promoStatus.classList.add("is-success");
+    }
+    document.documentElement.classList.add("promo-applied");
+    savePromo(appliedPromo);
+
+    if (shouldTrack) track("promo_applied", { promo: appliedPromo });
   }
 
   document.querySelectorAll("[data-config-price]").forEach((node) => {
-    node.textContent = config.productPrice || "990 ₽";
+    node.textContent = config.productPrice || "999 ₽";
   });
-
-  document.querySelectorAll("[data-payment]").forEach((button) => {
-    button.setAttribute("aria-label", `Купить набор за ${config.productPrice || "990 ₽"}`);
+  document.querySelectorAll("[data-config-promo-price]").forEach((node) => {
+    node.textContent = config.promoPrice || "499,50 ₽";
   });
-
+  document.querySelectorAll("[data-config-discount]").forEach((node) => {
+    node.textContent = config.promoDiscount || "50%";
+  });
+  document.querySelectorAll("[data-config-commission]").forEach((node) => {
+    node.textContent = config.partnerCommission || "20%";
+  });
   document.querySelectorAll("[data-config-name]").forEach((node) => {
-    node.textContent = config.productName || "7 AI-проектов для школьника на лето";
-  });
-
-  const emailLink = document.querySelector("[data-contact-email]");
-  if (emailLink && !isPlaceholder(config.contactEmail)) {
-    emailLink.textContent = config.contactEmail;
-    emailLink.href = `mailto:${config.contactEmail}`;
-  } else if (emailLink) {
-    emailLink.addEventListener("click", (event) => event.preventDefault());
-  }
-
-  document.querySelectorAll("[data-event]").forEach((element) => {
-    element.addEventListener("click", () => {
-      if (!element.hasAttribute("data-payment")) track(element.dataset.event);
-    });
+    node.textContent = config.productName || "AI-Лето: 7 проектов для школьника";
   });
 
   document.querySelectorAll("[data-payment]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
-      track(button.dataset.event);
+      const promo = appliedPromo || readStoredPromo();
+      if (button.dataset.event) track(button.dataset.event, promo ? { promo } : {});
+      track(promo ? "buy_with_promo_click" : "buy_without_promo_click", {
+        source: button.dataset.event || "payment_button",
+        ...(promo ? { promo } : {})
+      });
 
-      if (!paymentIsReady()) {
-        track("payment_url_missing", { source: button.dataset.event });
-        showToast();
-        document.querySelector("#inside")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (isPlaceholder(config.paymentUrl)) {
+        track("payment_url_missing", { source: button.dataset.event || "payment_button" });
+        showToast(
+          "Ссылка на оплату скоро появится",
+          "Сейчас вы можете оставить заявку или получить промокод для организации."
+        );
         return;
       }
 
       try {
-        window.location.assign(paymentUrlWithQuery());
+        window.location.assign(urlWithCurrentQuery(config.paymentUrl, promo));
       } catch (error) {
         console.error("Некорректная ссылка на оплату", error);
-        track("payment_url_missing", { source: button.dataset.event, reason: "invalid_url" });
-        showToast();
+        track("payment_url_missing", { source: button.dataset.event || "payment_button", reason: "invalid_url" });
+        showToast("Не удалось открыть оплату", "Проверьте ссылку или свяжитесь с нами по email.");
       }
     });
   });
 
-  document.querySelectorAll("details").forEach((details) => {
-    details.addEventListener("toggle", () => {
-      if (details.open) {
-        track("faq_open", { question: details.querySelector("summary")?.textContent.trim() || "" });
+  promoInput?.addEventListener("change", () => {
+    const code = normalizePromo(promoInput.value);
+    if (code && code !== lastTrackedPromo) {
+      lastTrackedPromo = code;
+      track("promo_entered", { promo: code });
+    }
+  });
+
+  promoForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const code = normalizePromo(promoInput?.value);
+    if (!code) {
+      if (promoStatus) {
+        promoStatus.textContent = "Введите промокод организации.";
+        promoStatus.classList.remove("is-success");
+      }
+      promoInput?.focus();
+      return;
+    }
+
+    if (code !== lastTrackedPromo) {
+      lastTrackedPromo = code;
+      track("promo_entered", { promo: code });
+    }
+    showPromoState(code, true);
+  });
+
+  document.querySelectorAll("[data-promo-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelector("#promo")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(() => promoInput?.focus(), 500);
+    });
+  });
+
+  document.querySelectorAll("[data-organization-cta]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      track("organization_cta_click", { source: button.textContent.trim() });
+
+      if (isPlaceholder(config.organizationFormUrl)) {
+        const email = isPlaceholder(config.contactEmail) ? "контактный email скоро появится на сайте" : config.contactEmail;
+        showToast("Форма заявки скоро появится", `Напишите нам на email: ${email}`);
+        document.querySelector("#organization-application")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      try {
+        window.location.assign(urlWithCurrentQuery(config.organizationFormUrl));
+      } catch (error) {
+        console.error("Некорректная ссылка на форму", error);
+        showToast("Не удалось открыть форму", "Пожалуйста, свяжитесь с нами по email.");
       }
     });
   });
+
+  document.querySelectorAll("[data-event]").forEach((element) => {
+    if (element.hasAttribute("data-payment") || element.hasAttribute("data-organization-cta")) return;
+    element.addEventListener("click", () => track(element.dataset.event));
+  });
+
+  document.querySelectorAll("details").forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (details.open) track("faq_open", { question: details.querySelector("summary")?.textContent.trim() || "" });
+    });
+  });
+
+  document.querySelectorAll("[data-contact-email]").forEach((emailLink) => {
+    if (!isPlaceholder(config.contactEmail)) {
+      emailLink.textContent = config.contactEmail;
+      emailLink.href = `mailto:${config.contactEmail}`;
+    } else {
+      emailLink.addEventListener("click", (event) => event.preventDefault());
+    }
+  });
+
+  const storedPromo = readStoredPromo();
+  if (storedPromo) showPromoState(storedPromo, false);
 
   toast?.querySelector("button")?.addEventListener("click", () => {
     window.clearTimeout(toastTimer);

@@ -4,10 +4,10 @@
   <circle cx="1050" cy="90" r="230" fill="#c9ff58" opacity=".65"/>
   <circle cx="100" cy="580" r="250" fill="#7867ef" opacity=".16"/>
   <rect x="72" y="62" width="1056" height="506" rx="34" fill="#fff" stroke="#d8dce8" stroke-width="2"/>
-  <text x="120" y="145" fill="#4f5a70" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="2">PDF-НАБОР · 10–16 ЛЕТ</text>
-  <text x="120" y="250" fill="#15192b" font-family="Arial,sans-serif" font-size="76" font-weight="800">7 AI-проектов</text>
-  <text x="120" y="335" fill="#15192b" font-family="Arial,sans-serif" font-size="76" font-weight="800">для школьника</text>
-  <text x="120" y="420" fill="#7867ef" font-family="Georgia,serif" font-size="76" font-style="italic">на лето</text>
-  <text x="122" y="495" fill="#4f5a70" font-family="Arial,sans-serif" font-size="28">От персонажа и постера — до своего мини-проекта</text>
+  <text x="120" y="145" fill="#4f5a70" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="2">ТЕТРАДЬ + МЕТОДИЧКА · 10–16 ЛЕТ</text>
+  <text x="120" y="250" fill="#15192b" font-family="Arial,sans-serif" font-size="76" font-weight="800">AI-Лето:</text>
+  <text x="120" y="335" fill="#15192b" font-family="Arial,sans-serif" font-size="76" font-weight="800">7 проектов</text>
+  <text x="120" y="420" fill="#7867ef" font-family="Georgia,serif" font-size="70" font-style="italic">для школьника</text>
+  <text x="122" y="495" fill="#4f5a70" font-family="Arial,sans-serif" font-size="28">Для семей, лагерей и летних площадок</text>
   <path d="M1010 211c7 54 26 73 79 80-53 7-72 26-79 80-7-54-26-73-79-80 53-7 72-26 79-80Z" fill="#15192b"/>
 </svg>
