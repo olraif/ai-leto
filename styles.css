@@ -119,6 +119,13 @@ button { color: inherit; }
 .microcopy span { margin-right: 6px; color: #348c47; font-weight: 800; }
 
 .hero-visual { position: relative; display: grid; min-height: 570px; place-items: center; }
+.hero-product-visual { width: 100%; max-width: 620px; margin-inline: auto; }
+.hero-cover { position: absolute; width: min(325px, 62%); margin: 0; }
+.hero-cover img { display: block; width: 100%; height: auto; border: 1px solid rgba(23, 26, 43, .1); border-radius: 22px; background: #fff; box-shadow: 0 28px 70px rgba(23, 26, 43, .22); }
+.hero-cover figcaption { position: absolute; right: 18px; bottom: 18px; padding: 9px 12px; border: 1px solid rgba(23,26,43,.1); border-radius: 100px; color: var(--ink); background: rgba(255,255,255,.92); box-shadow: 0 8px 22px rgba(23,26,43,.12); font-size: 10px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.hero-cover-child { z-index: 1; top: 10px; left: 0; transform: rotate(-5deg); }
+.hero-cover-mentor { z-index: 2; right: 0; bottom: 6px; transform: rotate(4deg); }
+.hero-cover-mentor figcaption { right: auto; left: 18px; }
 .workbook {
   position: relative;
   width: 380px;
@@ -207,6 +214,15 @@ button { color: inherit; }
 
 .inside-section { background: #fff; }
 .inside-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; align-items: center; gap: 110px; }
+.inside-section-compact { padding-block: 88px; }
+.inside-grid-text { display: block; }
+.inside-grid-text .inside-copy { display: grid; grid-template-columns: .8fr 1.2fr; gap: 85px; align-items: start; }
+.inside-grid-text .inside-heading { position: sticky; top: 110px; }
+.inside-grid-text .product-files { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 0; border-top: 0; }
+.inside-grid-text .product-files article { display: block; min-height: 100%; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: #f7f8f3; }
+.inside-grid-text .file-number { display: inline-grid; width: 34px; height: 34px; margin-bottom: 28px; place-items: center; border-radius: 50%; color: #fff; background: var(--violet); }
+.inside-grid-text .product-files h3 { font-size: 20px; line-height: 1.25; }
+.inside-grid-text .product-files li { font-size: 13px; line-height: 1.55; }
 .inside-preview { position: relative; min-height: 620px; }
 .product-cover-preview { display: block; margin: 0; }
 .product-cover-preview img { position: absolute; display: block; width: min(315px, 66%); height: auto; border: 1px solid rgba(23, 26, 43, 0.1); border-radius: 22px; background: #fff; box-shadow: 0 28px 70px rgba(23, 26, 43, 0.18); }
@@ -453,6 +469,7 @@ button { color: inherit; }
   .hero-grid { grid-template-columns: 1fr; gap: 30px; }
   .hero-copy { max-width: 750px; padding-top: 20px; }
   .hero-visual { min-height: 540px; }
+  .hero-product-visual { max-width: 600px; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
   .trust-strip > div:nth-child(2) { border-right: 0; }
   .trust-strip > div { border-bottom: 1px solid rgba(23,26,43,.12); }
@@ -463,6 +480,8 @@ button { color: inherit; }
   .project-grid { grid-template-columns: 1fr 1fr; }
   .project-card-wide { grid-column: span 2; }
   .inside-grid, .safety-grid { gap: 55px; }
+  .inside-grid-text .inside-copy { grid-template-columns: 1fr; gap: 38px; }
+  .inside-grid-text .inside-heading { position: static; max-width: 760px; }
   .audience-grid { gap: 55px; }
   .faq-grid { gap: 60px; }
   .parent-grid, .device-grid, .organization-hero, .rights-grid { gap: 55px; }
@@ -489,6 +508,15 @@ button { color: inherit; }
   .hero-actions .button { width: 100%; }
   .microcopy { text-align: center; }
   .hero-visual { min-height: 455px; }
+  .hero-product-visual { min-height: 500px; }
+  .hero-cover { width: min(270px, 64%); }
+  .hero-cover-child { top: 16px; left: 2%; }
+  .hero-cover-mentor { right: 2%; bottom: 10px; }
+  .hero-cover img { border-radius: 17px; }
+  .hero-cover figcaption { right: 10px; bottom: 10px; padding: 7px 9px; font-size: 8px; }
+  .hero-cover-mentor figcaption { right: auto; left: 10px; }
+  .hero-product-visual .visual-note-top { top: 34px; right: -2px; }
+  .hero-product-visual .visual-note-bottom { bottom: 13px; left: 0; }
   .workbook { width: 292px; height: 405px; padding: 22px; box-shadow: -10px 12px 0 #171a2b, var(--shadow); }
   .workbook-spark { margin-top: 33px; }
   .workbook h2 { font-size: 34px; }
@@ -509,6 +537,10 @@ button { color: inherit; }
   .project-card-image-wide { min-height: 0; aspect-ratio: 4 / 3; margin-top: 28px; }
   .inside-grid, .audience-grid, .safety-grid, .price-card, .faq-grid, .parent-grid, .device-grid, .organization-hero, .rights-grid { grid-template-columns: 1fr; }
   .inside-grid { gap: 45px; }
+  .inside-section-compact { padding-block: 64px; }
+  .inside-grid-text .inside-copy { gap: 30px; }
+  .inside-grid-text .product-files { grid-template-columns: 1fr; }
+  .inside-grid-text .product-files article { padding: 23px; }
   .inside-preview { min-height: 510px; }
   .product-cover-preview { min-height: 510px; }
   .product-cover-preview img { width: min(300px, 64%); border-radius: 18px; }
