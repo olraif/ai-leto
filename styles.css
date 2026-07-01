@@ -119,13 +119,6 @@ button { color: inherit; }
 .microcopy span { margin-right: 6px; color: #348c47; font-weight: 800; }
 
 .hero-visual { position: relative; display: grid; min-height: 570px; place-items: center; }
-.hero-product-visual { width: 100%; max-width: 620px; margin-inline: auto; }
-.hero-cover { position: absolute; width: min(325px, 62%); margin: 0; }
-.hero-cover img { display: block; width: 100%; height: auto; border: 1px solid rgba(23, 26, 43, .1); border-radius: 22px; background: #fff; box-shadow: 0 28px 70px rgba(23, 26, 43, .22); }
-.hero-cover figcaption { position: absolute; right: 18px; bottom: 18px; padding: 9px 12px; border: 1px solid rgba(23,26,43,.1); border-radius: 100px; color: var(--ink); background: rgba(255,255,255,.92); box-shadow: 0 8px 22px rgba(23,26,43,.12); font-size: 10px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
-.hero-cover-child { z-index: 1; top: 10px; left: 0; transform: rotate(-5deg); }
-.hero-cover-mentor { z-index: 2; right: 0; bottom: 6px; transform: rotate(4deg); }
-.hero-cover-mentor figcaption { right: auto; left: 18px; }
 .workbook {
   position: relative;
   width: 380px;
@@ -229,6 +222,10 @@ button { color: inherit; }
 .product-cover-preview .product-cover-child { z-index: 1; top: 24px; left: 0; transform: rotate(-5deg); }
 .product-cover-preview .product-cover-mentor { z-index: 2; right: 0; bottom: 55px; transform: rotate(4deg); }
 .product-cover-preview figcaption { position: absolute; right: 0; bottom: 0; left: 0; color: #6a7182; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
+.hero-covers-preview { width: min(540px, 100%); min-height: 570px; }
+.hero-covers-preview.product-cover-preview img { width: min(300px, 63%); }
+.hero-covers-preview.product-cover-preview .product-cover-child { top: 28px; left: 2%; }
+.hero-covers-preview.product-cover-preview .product-cover-mentor { right: 2%; bottom: 48px; }
 .page { position: absolute; top: 40px; left: 50%; width: min(410px, 86%); height: 540px; border: 1px solid #d8d9d4; border-radius: 6px; }
 .page-back { background: var(--violet); transform: translateX(-47%) rotate(7deg); }
 .page-front { overflow: hidden; padding: 42px; background: #f8f5ed; box-shadow: var(--shadow); transform: translateX(-55%) rotate(-3deg); }
@@ -469,7 +466,6 @@ button { color: inherit; }
   .hero-grid { grid-template-columns: 1fr; gap: 30px; }
   .hero-copy { max-width: 750px; padding-top: 20px; }
   .hero-visual { min-height: 540px; }
-  .hero-product-visual { max-width: 600px; }
   .trust-strip { grid-template-columns: 1fr 1fr; }
   .trust-strip > div:nth-child(2) { border-right: 0; }
   .trust-strip > div { border-bottom: 1px solid rgba(23,26,43,.12); }
@@ -508,15 +504,10 @@ button { color: inherit; }
   .hero-actions .button { width: 100%; }
   .microcopy { text-align: center; }
   .hero-visual { min-height: 455px; }
-  .hero-product-visual { min-height: 500px; }
-  .hero-cover { width: min(270px, 64%); }
-  .hero-cover-child { top: 16px; left: 2%; }
-  .hero-cover-mentor { right: 2%; bottom: 10px; }
-  .hero-cover img { border-radius: 17px; }
-  .hero-cover figcaption { right: 10px; bottom: 10px; padding: 7px 9px; font-size: 8px; }
-  .hero-cover-mentor figcaption { right: auto; left: 10px; }
-  .hero-product-visual .visual-note-top { top: 34px; right: -2px; }
-  .hero-product-visual .visual-note-bottom { bottom: 13px; left: 0; }
+  .hero-covers-preview { min-height: 470px; }
+  .hero-covers-preview.product-cover-preview img { width: min(255px, 64%); }
+  .hero-covers-preview.product-cover-preview .product-cover-child { top: 20px; left: 4%; }
+  .hero-covers-preview.product-cover-preview .product-cover-mentor { right: 4%; bottom: 42px; }
   .workbook { width: 292px; height: 405px; padding: 22px; box-shadow: -10px 12px 0 #171a2b, var(--shadow); }
   .workbook-spark { margin-top: 33px; }
   .workbook h2 { font-size: 34px; }
