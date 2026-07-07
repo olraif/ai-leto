@@ -410,7 +410,12 @@ button { color: inherit; }
 .organization-application h3 { margin: 0 0 9px; font-size: 30px; letter-spacing: -.04em; }
 .organization-application p:not(.section-kicker) { max-width: 670px; margin: 0; color: #bfc4d0; font-size: 13px; }
 .organization-application p.application-fields { margin-top: 10px; color: #8f96a7; font-size: 10px; }
-.organization-application .button { flex: 0 0 auto; }
+.organization-application p.email-fallback { margin-top: 13px; color: #dfe7c7; font-size: 12px; }
+.organization-application p.email-fallback a { color: var(--lime); font-weight: 850; text-decoration: none; }
+.application-actions { display: flex; flex: 0 0 auto; flex-direction: column; gap: 10px; }
+.application-actions .button { width: 100%; }
+.button-copy-email { color: #fff; border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.08); }
+.button-copy-email:hover { border-color: rgba(255,255,255,.48); background: rgba(255,255,255,.13); }
 
 .rights-section { background: #f5f0ff; }
 .rights-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; align-items: start; }
@@ -593,7 +598,7 @@ button { color: inherit; }
   .organization-benefits li { min-height: 112px; }
   .promo-model { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
   .organization-application { align-items: stretch; flex-direction: column; padding: 28px 24px; }
-  .organization-application .button { width: 100%; }
+  .organization-application .button, .application-actions { width: 100%; }
   .promo-box { grid-template-columns: 1fr; gap: 25px; padding: 25px 20px; }
   .promo-input-row { grid-template-columns: 1fr; }
   .promo-input-row .button { width: 100%; }

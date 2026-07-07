@@ -85,6 +85,24 @@
     toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 7500);
   }
 
+  function getContactEmail() {
+    return isPlaceholder(config.contactEmail) ? "info@ai-leto.ru" : config.contactEmail;
+  }
+
+  async function copyContactEmail() {
+    const email = getContactEmail();
+
+    try {
+      await navigator.clipboard.writeText(email);
+      showToast("Email скопирован", `Откройте любую почту и напишите на ${email}.`);
+      track("email_copy_click", { email });
+    } catch (error) {
+      console.warn("Не удалось скопировать email", error);
+      showToast("Email для связи", email);
+      track("email_copy_failed", { email });
+    }
+  }
+
   function showPromoState(code, shouldTrack = true) {
     appliedPromo = normalizePromo(code);
     if (!appliedPromo) return;
@@ -191,11 +209,18 @@
 
   document.querySelectorAll("[data-organization-cta]").forEach((button) => {
     button.addEventListener("click", (event) => {
-      event.preventDefault();
       track("organization_cta_click", { source: button.textContent.trim() });
+      const buttonUrl = button.getAttribute("href");
+      const targetUrl = !isPlaceholder(buttonUrl) ? buttonUrl : config.organizationFormUrl;
+
+      if (!isPlaceholder(targetUrl) && /^mailto:/i.test(targetUrl)) {
+        return;
+      }
+
+      event.preventDefault();
 
       if (isPlaceholder(config.organizationFormUrl)) {
-        const email = isPlaceholder(config.contactEmail) ? "контактный email скоро появится на сайте" : config.contactEmail;
+        const email = getContactEmail();
         showToast("Напишите нам на email", `Чтобы получить промокод, напишите на ${email}.`);
         document.querySelector("#organization-application")?.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
@@ -207,6 +232,13 @@
         console.error("Некорректная ссылка на форму", error);
         showToast("Не удалось открыть форму", "Пожалуйста, свяжитесь с нами по email.");
       }
+    });
+  });
+
+  document.querySelectorAll("[data-copy-email]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      copyContactEmail();
     });
   });
 
