@@ -103,21 +103,17 @@
   }
 
   document.querySelectorAll("[data-config-price]").forEach((node) => {
-    node.textContent = config.productPrice || "999 ₽";
+    node.textContent = config.productPrice || "399 ₽";
   });
   document.querySelectorAll("[data-config-name]").forEach((node) => {
-    node.textContent = config.productName || "AI-Лето: 7 проектов для школьника";
+    node.textContent = config.productName || "AI-Лето: 7 AI-проектов на лето";
   });
 
   document.querySelectorAll("[data-payment]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
-      const promo = appliedPromo || readStoredPromo();
-      if (button.dataset.event) track(button.dataset.event, promo ? { promo } : {});
-      track(promo ? "buy_with_promo_click" : "buy_without_promo_click", {
-        source: button.dataset.event || "payment_button",
-        ...(promo ? { promo } : {})
-      });
+      if (button.dataset.event) track(button.dataset.event);
+      track("buy_click", { source: button.dataset.event || "payment_button" });
 
       if (isPlaceholder(config.paymentUrl)) {
         track("payment_url_missing", { source: button.dataset.event || "payment_button" });
@@ -129,7 +125,7 @@
       }
 
       try {
-        window.location.assign(urlWithCurrentQuery(config.paymentUrl, promo));
+        window.location.assign(urlWithCurrentQuery(config.paymentUrl));
       } catch (error) {
         console.error("Некорректная ссылка на оплату", error);
         track("payment_url_missing", { source: button.dataset.event || "payment_button", reason: "invalid_url" });

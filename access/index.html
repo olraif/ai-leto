@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Страница получения электронного комплекта AI-Лето после оплаты.">
+  <title>Получить комплект — AI-Лето</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="access.css">
+</head>
+<body>
+  <a class="skip-link" href="#access-form">Перейти к форме</a>
+
+  <header class="access-header">
+    <div class="shell header-inner">
+      <a class="brand" href="https://ai-leto.ru" aria-label="AI-Лето — главная">
+        <img src="../assets/ai-leto-mark.png" alt="" width="42" height="42">
+        <span>AI-Лето</span>
+      </a>
+      <a class="support-link" href="mailto:info@ai-leto.ru">Нужна помощь?</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Электронный комплект</p>
+        <h1 id="page-title">Получить материалы AI-Лето</h1>
+        <p class="lead">Введите данные заказа, которые вы использовали при оплате. После проверки формы откроются материалы комплекта.</p>
+        <div class="trust-row" aria-label="Что понадобится">
+          <span>Номер заказа</span>
+          <span>Email покупателя</span>
+          <span>1–2 минуты</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="../assets/ai-leto-emblem.png" alt="">
+      </div>
+    </section>
+
+    <section class="access-section shell" aria-labelledby="form-title">
+      <div class="form-card">
+        <div class="card-heading">
+          <span class="step">01</span>
+          <div>
+            <p class="eyebrow">Подтверждение покупки</p>
+            <h2 id="form-title">Данные заказа</h2>
+          </div>
+        </div>
+
+        <form id="access-form" novalidate>
+          <label class="field">
+            <span>Номер заказа <b aria-hidden="true">*</b></span>
+            <input name="orderId" type="text" inputmode="numeric" autocomplete="off" required placeholder="Например, 123456789">
+          </label>
+
+          <label class="field">
+            <span>Email, указанный при оплате <b aria-hidden="true">*</b></span>
+            <input name="email" type="email" autocomplete="email" required placeholder="name@example.ru">
+          </label>
+
+          <label class="field">
+            <span>Код площадки / промокод <small>необязательно</small></span>
+            <input name="partnerCode" type="text" autocomplete="off" placeholder="Например, LETO2026">
+          </label>
+
+          <label class="consent">
+            <input name="personalUse" type="checkbox" required>
+            <span>Я подтверждаю, что приобретаю комплект для индивидуального использования и не буду передавать или распространять материалы.</span>
+          </label>
+
+          <button class="primary-button" type="submit">Открыть материалы <span aria-hidden="true">→</span></button>
+          <p class="form-note">Данные используются только для подтверждения покупки. Мы не запрашиваем сведения о ребёнке.</p>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <aside class="info-card" aria-label="Состав комплекта">
+        <p class="eyebrow">В комплекте</p>
+        <h2>Два материала для совместной работы</h2>
+        <ul>
+          <li><span>01</span><div><strong>Рабочая тетрадь ученика</strong><p>7 проектов: от идеи до презентации.</p></div></li>
+          <li><span>02</span><div><strong>Методичка наставника</strong><p>Подсказки, безопасность и сопровождение.</p></div></li>
+        </ul>
+        <p class="support-box">Не нашли номер заказа? Напишите на <a href="mailto:info@ai-leto.ru">info@ai-leto.ru</a> с адреса, указанного при оплате.</p>
+      </aside>
+    </section>
+
+    <section class="downloads shell" id="downloads" hidden aria-labelledby="downloads-title">
+      <div class="success-mark" aria-hidden="true">✓</div>
+      <p class="eyebrow">Покупка подтверждена</p>
+      <h2 id="downloads-title">Материалы готовы</h2>
+      <p>Сохраните оба документа на своё устройство. Ссылки предназначены только для покупателя.</p>
+      <div class="download-grid">
+        <a class="download-card" id="workbook-download" aria-disabled="true">
+          <span class="file-type">PDF</span>
+          <span><strong>Рабочая тетрадь ученика</strong><small>Скачать материал</small></span>
+          <b aria-hidden="true">↓</b>
+        </a>
+        <a class="download-card" id="guide-download" aria-disabled="true">
+          <span class="file-type">PDF</span>
+          <span><strong>Методичка наставника</strong><small>Скачать материал</small></span>
+          <b aria-hidden="true">↓</b>
+        </a>
+      </div>
+      <p class="download-status" id="download-status" role="status"></p>
+    </section>
+
+    <section class="legal-note shell" aria-label="Условия использования">
+      <strong>Важно</strong>
+      <p>Материалы защищены авторским правом и предназначены для индивидуального использования покупателем. Копирование, публикация, перепродажа и передача третьим лицам не допускаются.</p>
+    </section>
+  </main>
+
+  <footer class="access-footer">
+    <div class="shell">
+      <p>© 2026 AI-Лето</p>
+      <p>Поддержка: <a href="mailto:info@ai-leto.ru">info@ai-leto.ru</a></p>
+    </div>
+  </footer>
+
+  <script src="access.js" defer></script>
+</body>
+</html>

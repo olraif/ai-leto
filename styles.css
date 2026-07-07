@@ -302,6 +302,7 @@ button { color: inherit; }
 .price-row { display: flex; align-items: end; gap: 14px; margin: 34px 0; }
 .price-row strong { font-size: 58px; line-height: 1; letter-spacing: -.07em; }
 .price-row span { margin-bottom: 7px; color: #aeb4c2; font-size: 11px; }
+.payment-prompt { margin: -8px 0 24px; padding: 15px 17px; border: 1px solid rgba(185,255,69,.28); border-radius: 16px; color: #eef5dc; background: rgba(185,255,69,.08); font-size: 13px; line-height: 1.55; }
 .payment-note { margin: 18px 0 0; color: #aeb4c2; font-size: 10px; line-height: 1.55; }
 .price-card-list { padding: 50px; background: #252a3f; }
 .price-card-list > p:first-child { margin: 0 0 24px; color: #aeb4c2; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -398,6 +399,10 @@ button { color: inherit; }
 .rights-copy .rights-note { margin-top: 20px; padding: 20px; border: 0; border-radius: 16px; color: var(--ink); background: #fff; font-size: 13px; }
 
 .price-card-main .button + .button { margin-top: 10px; }
+.purchase-assurance { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr; gap: 13px; align-items: center; margin-top: 22px; padding: 22px 25px; border: 1px solid var(--line); border-radius: 22px; background: #f8f9fd; }
+.purchase-assurance span { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; color: #fff; background: var(--violet); font-size: 12px; font-weight: 800; }
+.purchase-assurance p { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
+.purchase-assurance strong { color: var(--ink); }
 .promo-box { display: grid; grid-template-columns: .8fr 1.2fr; gap: 45px; margin-top: 20px; padding: 34px; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); }
 .promo-box-copy h3 { margin: 0 0 12px; font-size: 28px; letter-spacing: -.04em; }
 .promo-box-copy > p:last-child { margin: 0; color: var(--ink-soft); font-size: 12px; }
@@ -579,6 +584,7 @@ button { color: inherit; }
   .price-card-main, .price-card-list { padding: 32px 25px; }
   .price-card-main { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
   .price-row strong { font-size: 50px; }
+  .purchase-assurance { grid-template-columns: auto 1fr; }
   .steps-list { grid-template-columns: 1fr; }
   .steps-list li { min-height: 270px; }
   .steps-list h3 { margin-top: 90px; }
