@@ -61,6 +61,8 @@
   }
 
   function urlWithCurrentQuery(rawUrl, promo = "") {
+    if (/^mailto:/i.test(String(rawUrl || ""))) return rawUrl;
+
     const target = new URL(rawUrl, window.location.href);
     const sourceParams = new URLSearchParams(window.location.search);
 
