@@ -120,9 +120,11 @@
       event.preventDefault();
       if (button.dataset.event) track(button.dataset.event);
       const paymentType = button.dataset.paymentType || "partner";
-      const paymentUrl = paymentType === "standard"
+      const buttonUrl = button.getAttribute("href");
+      const configuredPaymentUrl = paymentType === "standard"
         ? config.standardPaymentUrl
         : (config.partnerPaymentUrl || config.paymentUrl);
+      const paymentUrl = !isPlaceholder(buttonUrl) ? buttonUrl : configuredPaymentUrl;
       track("buy_click", { source: button.dataset.event || "payment_button", paymentType });
 
       if (isPlaceholder(paymentUrl)) {
