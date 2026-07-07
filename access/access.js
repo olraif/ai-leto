@@ -3,8 +3,8 @@ const ACCESS_FORM_ENDPOINT = ""; // TODO: добавить endpoint провер
 const DOWNLOADS_READY = true;
 
 const AI_LETO_DOWNLOADS = {
-  workbook: "/materials/ai-leto-student-workbook-v1.pdf",
-  mentorGuide: "/materials/ai-leto-mentor-guide-v1.pdf"
+  workbook: "../materials/ai-leto-student-workbook-v1.pdf",
+  mentorGuide: "../materials/ai-leto-mentor-guide-v1.pdf"
 };
 
 const form = document.querySelector("#access-form");
@@ -88,6 +88,10 @@ form.addEventListener("input", (event) => {
   if (event.target.matches("input")) event.target.classList.remove("user-invalid");
 });
 
-document.querySelectorAll(".download-card[aria-disabled='true']").forEach((link) => {
-  link.addEventListener("click", (event) => event.preventDefault());
+document.querySelectorAll(".download-card").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (link.getAttribute("aria-disabled") === "true") {
+      event.preventDefault();
+    }
+  });
 });
