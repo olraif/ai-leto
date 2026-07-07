@@ -109,7 +109,7 @@
     node.textContent = config.standardPrice || config.productPrice || "999 ₽";
   });
   document.querySelectorAll("[data-config-partner-price]").forEach((node) => {
-    node.textContent = config.partnerPrice || "399 ₽";
+    node.textContent = config.partnerPrice || "около 399 ₽";
   });
   document.querySelectorAll("[data-config-name]").forEach((node) => {
     node.textContent = config.productName || "AI-Лето: 7 AI-проектов на лето";
@@ -166,7 +166,7 @@
     const code = normalizePromo(promoInput?.value);
     if (!code) {
       if (promoStatus) {
-        promoStatus.textContent = "Введите промокод организации.";
+        promoStatus.textContent = "Введите промокод.";
         promoStatus.classList.remove("is-success");
       }
       promoInput?.focus();
@@ -194,7 +194,7 @@
 
       if (isPlaceholder(config.organizationFormUrl)) {
         const email = isPlaceholder(config.contactEmail) ? "контактный email скоро появится на сайте" : config.contactEmail;
-        showToast("Напишите нам на email", `Для промокода организации напишите на ${email}.`);
+        showToast("Напишите нам на email", `Чтобы получить промокод, напишите на ${email}.`);
         document.querySelector("#organization-application")?.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
