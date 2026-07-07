@@ -175,7 +175,7 @@
 
       if (isPlaceholder(config.organizationFormUrl)) {
         const email = isPlaceholder(config.contactEmail) ? "контактный email скоро появится на сайте" : config.contactEmail;
-        showToast("Форма заявки скоро появится", `Напишите нам на email: ${email}`);
+        showToast("Напишите нам на email", `Для промокода организации напишите на ${email}.`);
         document.querySelector("#organization-application")?.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
