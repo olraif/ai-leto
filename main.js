@@ -103,7 +103,13 @@
   }
 
   document.querySelectorAll("[data-config-price]").forEach((node) => {
-    node.textContent = config.productPrice || "399 ₽";
+    node.textContent = config.productPrice || config.standardPrice || "999 ₽";
+  });
+  document.querySelectorAll("[data-config-standard-price]").forEach((node) => {
+    node.textContent = config.standardPrice || config.productPrice || "999 ₽";
+  });
+  document.querySelectorAll("[data-config-partner-price]").forEach((node) => {
+    node.textContent = config.partnerPrice || "399 ₽";
   });
   document.querySelectorAll("[data-config-name]").forEach((node) => {
     node.textContent = config.productName || "AI-Лето: 7 AI-проектов на лето";
@@ -113,22 +119,33 @@
     button.addEventListener("click", (event) => {
       event.preventDefault();
       if (button.dataset.event) track(button.dataset.event);
-      track("buy_click", { source: button.dataset.event || "payment_button" });
+      const paymentType = button.dataset.paymentType || "partner";
+      const paymentUrl = paymentType === "standard"
+        ? config.standardPaymentUrl
+        : (config.partnerPaymentUrl || config.paymentUrl);
+      track("buy_click", { source: button.dataset.event || "payment_button", paymentType });
 
-      if (isPlaceholder(config.paymentUrl)) {
-        track("payment_url_missing", { source: button.dataset.event || "payment_button" });
-        showToast(
-          "Ссылка на оплату скоро появится",
-          "Сейчас вы можете оставить заявку или получить промокод для организации."
-        );
+      if (isPlaceholder(paymentUrl)) {
+        track("payment_url_missing", { source: button.dataset.event || "payment_button", paymentType });
+        if (paymentType === "standard") {
+          showToast(
+            "Ссылка на покупку за 999 ₽ скоро появится",
+            "Пока можно купить по коду площадки или написать нам на info@ai-leto.ru."
+          );
+        } else {
+          showToast(
+            "Ссылка на оплату по коду скоро появится",
+            "Напишите нам на info@ai-leto.ru, если код уже есть, а кнопка не открывается."
+          );
+        }
         return;
       }
 
       try {
-        window.location.assign(urlWithCurrentQuery(config.paymentUrl));
+        window.location.assign(urlWithCurrentQuery(paymentUrl));
       } catch (error) {
         console.error("Некорректная ссылка на оплату", error);
-        track("payment_url_missing", { source: button.dataset.event || "payment_button", reason: "invalid_url" });
+        track("payment_url_missing", { source: button.dataset.event || "payment_button", paymentType, reason: "invalid_url" });
         showToast("Не удалось открыть оплату", "Проверьте ссылку или свяжитесь с нами по email.");
       }
     });

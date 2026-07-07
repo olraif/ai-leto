@@ -302,7 +302,15 @@ button { color: inherit; }
 .price-row { display: flex; align-items: end; gap: 14px; margin: 34px 0; }
 .price-row strong { font-size: 58px; line-height: 1; letter-spacing: -.07em; }
 .price-row span { margin-bottom: 7px; color: #aeb4c2; font-size: 11px; }
+.price-options { display: grid; gap: 14px; margin-top: 28px; }
+.price-option { padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 20px; background: rgba(255,255,255,.05); }
+.price-option > small { display: block; color: #aeb4c2; font-size: 10px; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+.price-option .price-row { margin: 13px 0 16px; }
+.price-option .price-row strong { font-size: 44px; }
+.price-option-accent { border-color: rgba(185,255,69,.38); background: rgba(185,255,69,.08); }
+.price-option-accent > small { color: var(--lime); }
 .payment-prompt { margin: -8px 0 24px; padding: 15px 17px; border: 1px solid rgba(185,255,69,.28); border-radius: 16px; color: #eef5dc; background: rgba(185,255,69,.08); font-size: 13px; line-height: 1.55; }
+.price-option .payment-prompt { margin: 0 0 14px; }
 .payment-note { margin: 18px 0 0; color: #aeb4c2; font-size: 10px; line-height: 1.55; }
 .price-card-list { padding: 50px; background: #252a3f; }
 .price-card-list > p:first-child { margin: 0 0 24px; color: #aeb4c2; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
