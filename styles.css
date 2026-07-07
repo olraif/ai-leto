@@ -445,6 +445,10 @@ button { color: inherit; }
 .promo-result .button { white-space: nowrap; }
 
 .final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.final-email-fallback { margin: 18px 0 0; color: rgba(255,255,255,.74); font-size: 13px; }
+.final-email-fallback a { color: var(--lime); font-weight: 850; text-decoration: none; }
+.final-email-fallback button { margin-left: 8px; border: 1px solid rgba(255,255,255,.26); border-radius: 999px; padding: 7px 12px; color: #fff; background: rgba(255,255,255,.08); font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.final-email-fallback button:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.14); }
 
 .site-footer { padding: 70px 0 30px; color: #555d6d; background: #ecede8; }
 .footer-grid { display: grid; grid-template-columns: 1.25fr .65fr .9fr 1fr; gap: 52px; padding-bottom: 55px; }

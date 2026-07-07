@@ -208,8 +208,21 @@
   });
 
   document.querySelectorAll("[data-organization-cta]").forEach((button) => {
+    const shouldScrollToApplication = /^(Получить промокод|Стать партнером)/i.test(button.textContent.trim());
+
+    if (shouldScrollToApplication) {
+      button.setAttribute("href", "#organization-application");
+    }
+
     button.addEventListener("click", (event) => {
       track("organization_cta_click", { source: button.textContent.trim() });
+
+      if (shouldScrollToApplication) {
+        event.preventDefault();
+        document.querySelector("#organization-application")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
       const buttonUrl = button.getAttribute("href");
       const targetUrl = !isPlaceholder(buttonUrl) ? buttonUrl : config.organizationFormUrl;
 
